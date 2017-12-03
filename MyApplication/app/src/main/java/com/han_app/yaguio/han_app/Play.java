@@ -41,8 +41,6 @@ public class Play  extends Service{
 
     @Override
     public void onCreate() {
-
-
         hasFlash = getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
@@ -54,7 +52,7 @@ public class Play  extends Service{
         getCamera();
 
         final Handler handler = new Handler();
-        final int delay = 200; //milliseconds
+        final int delay = 500; //milliseconds
 
         handler.postDelayed(new Runnable(){
             public void run(){

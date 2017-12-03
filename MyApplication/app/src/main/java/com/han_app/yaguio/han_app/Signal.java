@@ -44,17 +44,33 @@ public class Signal extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                Play.flashswitch = false;
+                Play.soundswitch = false;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        Play.flashswitch = false;
+        Play.soundswitch = false;
+        super.onBackPressed();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signal);
 
-           ListView devices = (ListView) findViewById(R.id.messages);
+
+        Play.flashswitch = true;
+        Play.soundswitch = true;
+
+
+        ListView devices = (ListView) findViewById(R.id.messages);
            ArrayAdapter messagesa = new ArrayAdapter<>(Signal.this, android.R.layout.simple_list_item_1, messages);
            devices.setAdapter(messagesa);
 

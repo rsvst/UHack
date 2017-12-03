@@ -110,6 +110,7 @@ public class Search extends AppCompatActivity {
 
     }
 
+
     private void connectToDevice(String deviceAddress) {
         bluetoothAdapter.cancelDiscovery();
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
