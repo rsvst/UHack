@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,6 +27,19 @@ public class Search extends AppCompatActivity {
     private ChatController chatController;
     ArrayList<String> scanned = new ArrayList<>();
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +101,7 @@ public class Search extends AppCompatActivity {
         //}
 
 
+        scanned.add("User 1\nAddress 1234");
         ListView devices = (ListView) findViewById(R.id.devices);
         discoveredDevicesAdapter = new ArrayAdapter<>(Search.this, android.R.layout.simple_list_item_1, scanned);
         devices.setAdapter(discoveredDevicesAdapter);
@@ -99,7 +115,5 @@ public class Search extends AppCompatActivity {
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
         chatController.connect(device);
     }
-
-
 
 }
